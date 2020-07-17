@@ -12,7 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
 @Controller
@@ -37,7 +39,10 @@ public class AuthorizeController {
      * @return  返回地址
      */
     @GetMapping("/callback")
-    public String index(@RequestParam("code") String code, @RequestParam(name="state") String state, HttpServletRequest request) {
+    public String index(@RequestParam("code") String code,
+                        @RequestParam(name="state") String state,
+                        HttpServletRequest request,
+                        HttpServletResponse response) {
         AccessTokenDto accessTokenDto = new AccessTokenDto();
         accessTokenDto.setClient_id(id);
         accessTokenDto.setClient_secret(secret);
@@ -56,12 +61,12 @@ public class AuthorizeController {
             user.setGmtCreate(System.currentTimeMillis());
             user.setGmtModified(user.getGmtCreate());
             userMapper.insert(user);
-            //登录成功 写cookie 和session 并重定向回index
-            request.getSession().setAttribute("user",githubUser);
+            //添加tcookie 身份识别
+            response.addCookie(new Cookie("token",user.getToken()));
             return "redirect:index";
         } else {
           //登录失败
-          return   "index";
+          return   "redirect:index";
         }
     }
 }

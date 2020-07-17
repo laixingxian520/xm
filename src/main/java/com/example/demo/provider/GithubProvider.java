@@ -31,7 +31,7 @@ public class GithubProvider {
          } catch (Exception e) {
              e.printStackTrace();
          }
-         return  "翻车";
+         return  null;
      }
 
     /**
