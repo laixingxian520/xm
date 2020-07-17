@@ -6,6 +6,7 @@ package com.example.demo.dto;
 public class GithubUser {
     //名字
     private  String name;
+
     //id唯一
     private  Long id;
 
@@ -13,6 +14,15 @@ public class GithubUser {
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public String toString() {
+        return "GithubUser{" +
+                "name='" + name + '\'' +
+                ", id=" + id +
+                ", bio='" + bio + '\'' +
+                '}';
     }
 
     public void setName(String name) {
