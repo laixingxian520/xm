@@ -1,0 +1,15 @@
+/*背景颜色*/
+body{
+    background-color: #efefef;
+}
+/*输入框报警颜色*/
+.main{
+    margin: 30px;
+    background-color: white
+}
+
+/*发布按钮*/
+.btn-publish{
+    float: right;
+    margin-bottom: 15px;
+}

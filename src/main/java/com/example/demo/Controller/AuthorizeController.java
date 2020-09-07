@@ -51,7 +51,7 @@ public class AuthorizeController {
         accessTokenDto.setState(state);
         String accessToken = githubProvider.getAccessToken(accessTokenDto);
         GithubUser githubUser = githubProvider.getUser(accessToken);
-        if (githubUser !=null){
+        if (githubUser !=null && githubUser.getId()!=null){
             //不为空把当前数值传过去
             User user=new User();
             user.setToken(UUID.randomUUID().toString());
